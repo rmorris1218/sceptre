@@ -150,6 +150,8 @@ def validate_template(ctx, environment, stack):
     """
     env = get_env(ctx.obj["sceptre_dir"], environment, ctx.obj["options"])
     result = env.stacks[stack].validate_template()
+    if result.get('ResponseMetadata'):
+        del result['ResponseMetadata']
     write(result, ctx.obj["output_format"])
 
 
